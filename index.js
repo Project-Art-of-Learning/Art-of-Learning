@@ -22,6 +22,10 @@ app.use('/static', express.static('static'))
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 
+// set path to views
+app.set('views', './views');
+
+
 app.get('/', (req, res) => {
   res.render("index")
 })
