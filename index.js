@@ -35,3 +35,4 @@ app.listen(port, () => {
   console.log(`Application running with the port: ${port}`)
 })
 
+module.exports = app;
