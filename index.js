@@ -6,6 +6,7 @@
 // import needed dependencies
 require('ejs');
 const express = require('express')
+const { v4 } = require('uuid');
 var cookieParser = require('cookie-parser')
 
 
@@ -18,6 +19,7 @@ app.use(cookieParser())
 
 // Static endpoints
 app.use('/static', express.static('static'))
+
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
@@ -34,6 +36,18 @@ app.get('/test', (req, res) => {
     console.log("test")
     res.send('Test!')
 })
+
+app.get('/api', (req, res) => {
+  const path = `/api/item/${v4()}`;
+  res.setHeader('Content-Type', 'text/html');
+  res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
+  res.end(`Hello! Go to item: <a href="${path}">${path}</a>`);
+});
+
+app.get('/api/item/:slug', (req, res) => {
+  const { slug } = req.params;
+  res.end(`Item: ${slug}`);
+});
 
 app.listen(port, () => {
   console.log(`Application running with the port: ${port}`)
