@@ -18,7 +18,15 @@ const port = 8080
 app.use(cookieParser())
 
 // Static endpoints
-app.use('/static', express.static('static'))
+app.use('/static', express.static('static', { 
+  // Set correct headers
+  setHeaders: (res, path) => {
+    // CSS files
+    if (path.endsWith('.css')) {
+      res.setHeader('Content-Type', 'text/css');
+    }
+  },
+}));
 
 
 // set the view engine to ejs
