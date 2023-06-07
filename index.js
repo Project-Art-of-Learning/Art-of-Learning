@@ -6,7 +6,7 @@
 // import needed dependencies
 require('ejs');
 const express = require('express')
-const { v4 } = require('uuid');
+const v4 = require('uuid');
 var cookieParser = require('cookie-parser')
 
 
@@ -25,7 +25,7 @@ app.use('/static', express.static('static'))
 app.set('view engine', 'ejs');
 
 // set path to views
-app.set('views', 'views');
+app.set('views', __dirname + '/views');
 
 
 app.get('/', (req, res) => {
